@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/securehub" mode="merge"/>
+    <filter root="/content/securehub" mode="merge"/>
+    <filter root="/content/dam/securehub" mode="merge">
+        <exclude pattern="/content/dam/securehub(/.*)?"/>
+        <include pattern="/content/dam/securehub/jcr:content(/.*)?"/>
+    </filter>
+    <filter root="/content/dam/securehub/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/securehub" mode="merge"/>
+</workspaceFilter>
