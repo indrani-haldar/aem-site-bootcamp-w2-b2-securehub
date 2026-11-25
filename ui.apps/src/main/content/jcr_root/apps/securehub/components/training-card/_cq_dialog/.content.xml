@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Training Card Properties"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+        <items jcr:primaryType="nt:unstructured">
+            <column
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <courseTitle
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Course Title"
+                        name="./courseTitle"
+                        required="{Boolean}true"/>
+                    <level
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                        fieldLabel="Level"
+                        name="./level"
+                        required="{Boolean}true"
+                        value="beginner">
+                        <items jcr:primaryType="nt:unstructured">
+                            <beginner
+                                jcr:primaryType="nt:unstructured"
+                                text="Beginner"
+                                value="beginner"/>
+                            <intermediate
+                                jcr:primaryType="nt:unstructured"
+                                text="Intermediate"
+                                value="intermediate"/>
+                            <advanced
+                                jcr:primaryType="nt:unstructured"
+                                text="Advanced"
+                                value="advanced"/>
+                        </items>
+                    </level>
+                    <duration
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Duration"
+                        name="./duration"
+                        emptyText="For example: 45 minutes"/>
+                    <format
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                        fieldLabel="Format"
+                        name="./format"
+                        required="{Boolean}true"
+                        value="self-paced">
+                        <items jcr:primaryType="nt:unstructured">
+                            <selfPaced
+                                jcr:primaryType="nt:unstructured"
+                                text="Self-paced"
+                                value="self-paced"/>
+                            <instructorLed
+                                jcr:primaryType="nt:unstructured"
+                                text="Instructor-led"
+                                value="instructor-led"/>
+                        </items>
+                    </format>
+                    <fileReference
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                        fieldLabel="Image"
+                        name="./fileReference"
+                        rootPath="/content/dam"/>
+                    <ctaText
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="CTA Text"
+                        name="./ctaText"
+                        emptyText="View"/>
+                    <ctaLink
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                        fieldLabel="CTA Link"
+                        name="./ctaLink"
+                        rootPath="/content"/>
+                </items>
+            </column>
+        </items>
+    </content>
+</jcr:root>

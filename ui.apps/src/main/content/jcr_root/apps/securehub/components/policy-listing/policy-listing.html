@@ -1,0 +1,75 @@
+<section class="policy-listing" data-sly-use.model="com.securehub.core.models.PolicyListingModel"
+         id="${model.id}" data-cmp-is="policy-listing" aria-labelledby="${model.id}-heading">
+    <h2 class="policy-listing__heading" id="${model.id}-heading">Security Policies</h2>
+    <p class="policy-listing__intro">Select a category to explore the policies that apply to you.</p>
+
+    <div class="policy-listing__tabs" role="tablist" aria-label="Filter policies by category">
+        <button class="policy-listing__tab" type="button" role="tab" id="${model.id}-tab-all"
+                data-filter="all" aria-controls="${model.id}-panel" aria-selected="true" tabindex="0">
+            <span class="policy-listing__tab-label">All</span>
+            <span class="policy-listing__tab-count" aria-hidden="true" hidden></span>
+        </button>
+        <button class="policy-listing__tab" type="button" role="tab" id="${model.id}-tab-access"
+                data-filter="access" aria-controls="${model.id}-panel" aria-selected="false" tabindex="-1">
+            <span class="policy-listing__tab-label">Access</span>
+            <span class="policy-listing__tab-count" aria-hidden="true" hidden></span>
+        </button>
+        <button class="policy-listing__tab" type="button" role="tab" id="${model.id}-tab-data"
+                data-filter="data" aria-controls="${model.id}-panel" aria-selected="false" tabindex="-1">
+            <span class="policy-listing__tab-label">Data</span>
+            <span class="policy-listing__tab-count" aria-hidden="true" hidden></span>
+        </button>
+        <button class="policy-listing__tab" type="button" role="tab" id="${model.id}-tab-network"
+                data-filter="network" aria-controls="${model.id}-panel" aria-selected="false" tabindex="-1">
+            <span class="policy-listing__tab-label">Network</span>
+            <span class="policy-listing__tab-count" aria-hidden="true" hidden></span>
+        </button>
+        <button class="policy-listing__tab" type="button" role="tab" id="${model.id}-tab-usage"
+                data-filter="usage" aria-controls="${model.id}-panel" aria-selected="false" tabindex="-1">
+            <span class="policy-listing__tab-label">Usage</span>
+            <span class="policy-listing__tab-count" aria-hidden="true" hidden></span>
+        </button>
+    </div>
+
+    <p class="policy-listing__count" aria-live="polite" aria-atomic="true">
+        Showing ${model.count} policies
+    </p>
+
+    <div class="policy-listing__panel" role="tabpanel" id="${model.id}-panel"
+         aria-labelledby="${model.id}-tab-all" tabindex="0">
+        <ul class="policy-listing__grid" data-sly-test="${model.count}">
+            <li data-sly-repeat.policy="${model.policies}">
+                <article class="policy-listing__card" id="${policy.anchor}"
+                         data-category="${policy.categoryKey}">
+                    <p class="policy-listing__category" data-sly-test="${policy.category}">${policy.category}</p>
+                    <h3 class="policy-listing__title">${policy.title}</h3>
+                    <dl class="policy-listing__meta">
+                        <div data-sly-test="${policy.owner}">
+                            <dt>Owner</dt>
+                            <dd>${policy.owner}</dd>
+                        </div>
+                        <div data-sly-test="${policy.effectiveDate}">
+                            <dt>Effective date</dt>
+                            <dd>${policy.effectiveDate}</dd>
+                        </div>
+                        <div data-sly-test="${policy.reviewDate}">
+                            <dt>Review date</dt>
+                            <dd>${policy.reviewDate}</dd>
+                        </div>
+                        <div data-sly-test="${policy.version}">
+                            <dt>Version</dt>
+                            <dd>${policy.version}</dd>
+                        </div>
+                    </dl>
+                    <a class="policy-listing__link" href="${policy.detailLink}">
+                        Read policy<span class="visually-hidden">: ${policy.title}</span>
+                        <span class="policy-listing__link-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                </article>
+            </li>
+        </ul>
+
+        <p class="policy-listing__empty" data-sly-test="${!model.count}">No policies are available. Select valid policy Content Fragments in the dialog.</p>
+        <p class="policy-listing__empty policy-listing__no-match" hidden>No policies in this category.</p>
+    </div>
+</section>

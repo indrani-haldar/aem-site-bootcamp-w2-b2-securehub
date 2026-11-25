@@ -1,0 +1,13 @@
+<section id="securehub-hero" class="securehub-hero" data-sly-use.hero="com.securehub.core.models.HeroModel"
+         data-sly-test.hasContent="${hero.title || hero.description || hero.fileReference || hero.ctaText}">
+    <div id="securehub-hero_content" class="securehub-hero__content">
+        <h1 id="securehub-hero_title" class="securehub-hero__title" data-sly-test="${hero.title}">${hero.title}</h1>
+        <p id="securehub-hero_description" class="securehub-hero__description" data-sly-test="${hero.description}">${hero.description}</p>
+        <a id="securehub-hero_button" class="securehub-hero__button" data-sly-test="${hero.ctaText && hero.ctaUrl}"
+           href="${hero.ctaUrl}">${hero.ctaText}</a>
+    </div>
+    <div id="securehub-hero_image" class="securehub-hero__image" data-sly-test="${hero.fileReference}">
+        <img class="securehub-hero__img" src="${hero.fileReference}" alt="${hero.title}" loading="eager"/>
+    </div>
+</section>
+<p class="securehub-hero__placeholder" data-sly-test="${!hasContent && wcmmode.edit}">SecureHub Hero: open the dialog to add an image, title, description and button.</p>

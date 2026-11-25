@@ -1,0 +1,181 @@
+// Limits the alert width and centres it on the page.
+.security-alert-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 880px;
+    margin: 32px auto;
+    padding: 0 24px;
+}
+
+// Severity is always shown as text and an icon shape; colour only reinforces it.
+.cmp-security-alert {
+    --alert-accent: #1570ef;
+    --alert-tint: #eff8ff;
+    --alert-text: #194185;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "severity"
+        "title"
+        "summary"
+        "date"
+        "cta";
+    gap: 12px;
+    margin: 0;
+    padding: 20px 24px;
+    border: 1px solid #d0d5dd;
+    border-left: 6px solid var(--alert-accent);
+    border-radius: 12px;
+    background-color: var(--alert-tint);
+    color: #101828;
+    font-family: $font-family;
+    line-height: $font-height;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+.cmp-security-alert--critical {
+    --alert-accent: #b42318;
+    --alert-tint: #fef3f2;
+    --alert-text: #912018;
+}
+
+.cmp-security-alert--high {
+    --alert-accent: #b54708;
+    --alert-tint: #fffaeb;
+    --alert-text: #93370d;
+}
+
+.cmp-security-alert--info {
+    --alert-accent: #1570ef;
+    --alert-tint: #eff8ff;
+    --alert-text: #194185;
+}
+
+.cmp-security-alert__severity {
+    grid-area: severity;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-self: start;
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--alert-text);
+}
+
+.cmp-security-alert__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background-color: var(--alert-accent);
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1;
+
+    &::before {
+        content: "i";
+    }
+}
+
+.cmp-security-alert--critical .cmp-security-alert__icon::before {
+    content: "!";
+}
+
+.cmp-security-alert--high .cmp-security-alert__icon::before {
+    content: "\25B2";
+}
+
+.cmp-security-alert__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.cmp-security-alert__title {
+    grid-area: title;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #101828;
+}
+
+.cmp-security-alert__summary {
+    grid-area: summary;
+    margin: 0;
+    color: #344054;
+}
+
+.cmp-security-alert__date {
+    grid-area: date;
+    margin: 0;
+    font-size: 0.875rem;
+    color: #475467;
+}
+
+.cmp-security-alert__date-label {
+    margin-right: 4px;
+    font-weight: 600;
+}
+
+.cmp-security-alert__cta {
+    grid-area: cta;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #1849a9;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: #194185;
+    }
+
+    &:focus-visible {
+        outline: 3px solid #2e90fa;
+        outline-offset: 2px;
+    }
+}
+
+// Tablet and up: text on the left, CTA on the right
+@media (min-width: 768px) {
+    .cmp-security-alert {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "severity cta"
+            "title    cta"
+            "summary  cta"
+            "date     cta";
+        align-items: center;
+        column-gap: 24px;
+        padding: 24px 32px;
+    }
+
+    .cmp-security-alert__cta {
+        justify-self: end;
+    }
+}
+
+@media (max-width: 767px) {
+    .security-alert-container {
+        margin: 24px auto;
+        padding: 0 16px;
+    }
+}

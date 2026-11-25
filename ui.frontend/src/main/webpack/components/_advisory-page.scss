@@ -1,0 +1,312 @@
+/* ========================================
+   SECURITY ADVISORIES PAGE INTRO (IDs authored in the component dialogs)
+   #advisory-title        -> Title  (.cmp-title > h1)
+   #advisory-description  -> Text   (.cmp-text)
+   #advisory-severity     -> Text   (.cmp-text, "Severity Key")
+   #btn-all / #btn-info   -> Button (button.cmp-button)
+   #btn-high              -> Button
+   #btn-critical          -> Button
+   ======================================== */
+
+$adv-ink: #0f172a;
+$adv-muted: #475569;
+$adv-blue: #2457ff;
+$adv-violet: #7c3aed;
+
+@keyframes advisory-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes advisory-bar {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+@keyframes advisory-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.85); }
+    70%  { box-shadow: 0 0 0 7px rgba(255, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+/* ---------- Title ---------- */
+#advisory-title {
+    max-width: 1200px;
+    margin: clamp(2rem, 5vw, 3.5rem) auto 0.75rem;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+    text-align: center;
+    animation: advisory-rise 0.6s ease-out both;
+
+    .cmp-title__text {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        padding-bottom: 0.9rem;
+        font-size: clamp(2rem, 5vw, 3.25rem);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: $adv-ink;
+        background: linear-gradient(120deg, $adv-ink 0%, $adv-blue 55%, $adv-violet 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: background-position 0.8s ease;
+
+        // Animated accent bar under the heading
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 72px;
+            height: 4px;
+            margin-left: -36px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, $adv-blue, $adv-violet);
+            transform-origin: center;
+            animation: advisory-bar 0.7s 0.3s ease-out both;
+            transition: width 0.3s ease, margin-left 0.3s ease;
+        }
+    }
+
+    &:hover .cmp-title__text {
+        background-position: right center;
+
+        &::after {
+            width: 120px;
+            margin-left: -60px;
+        }
+    }
+}
+
+/* ---------- Description ---------- */
+#advisory-description {
+    max-width: 640px;
+    margin: 0 auto 1.75rem;
+    padding: 0 1rem;
+    text-align: center;
+    animation: advisory-rise 0.6s 0.15s ease-out both;
+
+    p {
+        margin: 0;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        line-height: 1.6;
+        color: $adv-muted;
+    }
+}
+
+/* ---------- "Severity Key" label ---------- */
+#advisory-severity {
+    margin: 0 auto 0.9rem;
+    text-align: center;
+    animation: advisory-rise 0.6s 0.25s ease-out both;
+
+    p {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin: 0;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: $adv-muted;
+
+        // Thin lines either side of the label
+        &::before,
+        &::after {
+            content: "";
+            width: 36px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #94a3b8);
+        }
+
+        &::after {
+            background: linear-gradient(90deg, #94a3b8, transparent);
+        }
+    }
+
+    b,
+    strong {
+        font-weight: inherit;
+    }
+}
+
+/* ---------- Severity buttons ---------- */
+
+// Put the three button wrappers side by side and centred; every other component in the container keeps its full row.
+.cmp-container:has(> .button > #btn-high, > .button > #btn-critical),
+.aem-Grid:has(> .button > #btn-high, > .button > #btn-critical) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 0.75rem;
+
+    > * {
+        flex: 0 0 100%;
+        min-width: 0;
+    }
+
+    > .button:has(> #btn-all, > #btn-info, > #btn-high, > #btn-critical) {
+        flex: 0 0 auto;
+        width: auto;
+        margin-bottom: 2rem;
+        animation: advisory-rise 0.5s 0.35s ease-out both;
+    }
+}
+
+#btn-all,
+#btn-info,
+#btn-high,
+#btn-critical {
+    --btn-from: #{$adv-blue};
+    --btn-to: #{$adv-violet};
+    --btn-glow: rgba(36, 87, 255, 0.35);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-width: 128px;
+    justify-content: center;
+    padding: 0.7rem 1.4rem;
+    overflow: hidden;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #fff;
+    background: linear-gradient(135deg, var(--btn-from), var(--btn-to));
+    border: 0;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px var(--btn-glow);
+    cursor: pointer;
+    isolation: isolate;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+
+    // Status dot in front of the label
+    &::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: #fff;
+    }
+
+    // Light sweep across the button on hover
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+        transform: translateX(-120%);
+        transition: transform 0.6s ease;
+    }
+
+    .cmp-button__text {
+        position: relative;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px var(--btn-glow);
+        filter: saturate(1.15);
+
+        &::after {
+            transform: translateX(120%);
+        }
+    }
+
+    &:active {
+        transform: translateY(0) scale(0.97);
+        box-shadow: 0 2px 8px var(--btn-glow);
+    }
+
+    &:focus-visible {
+        outline: 3px solid #fff;
+        outline-offset: 2px;
+        box-shadow: 0 0 0 6px var(--btn-from), 0 10px 24px var(--btn-glow);
+    }
+
+    // Selected state, if a script toggles aria-pressed or .is-active
+    &[aria-pressed="true"],
+    &.is-active {
+        box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--btn-from), 0 10px 24px var(--btn-glow);
+    }
+}
+
+#btn-all {
+    --btn-from: #334155;
+    --btn-to: #0f172a;
+    --btn-glow: rgba(15, 23, 42, 0.3);
+}
+
+#btn-info {
+    --btn-from: #0ea5e9;
+    --btn-to: #{$adv-blue};
+    --btn-glow: rgba(14, 165, 233, 0.35);
+}
+
+#btn-high {
+    --btn-from: #f59e0b;
+    --btn-to: #ea580c;
+    --btn-glow: rgba(234, 88, 12, 0.35);
+}
+
+#btn-critical {
+    --btn-from: #ef4444;
+    --btn-to: #b91c1c;
+    --btn-glow: rgba(220, 38, 38, 0.4);
+
+    // Critical gets a pulsing dot to draw the eye
+    &::before {
+        animation: advisory-pulse 1.8s ease-out infinite;
+    }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 767px) {
+    .cmp-container:has(> .button > #btn-high, > .button > #btn-critical),
+    .aem-Grid:has(> .button > #btn-high, > .button > #btn-critical) {
+        column-gap: 0.5rem;
+
+        > .button:has(> #btn-all, > #btn-info, > #btn-high, > #btn-critical) {
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    #btn-all,
+    #btn-info,
+    #btn-high,
+    #btn-critical {
+        min-width: 0;
+        padding: 0.6rem 1.1rem;
+        font-size: 0.88rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #advisory-title,
+    #advisory-title .cmp-title__text::after,
+    #advisory-description,
+    #advisory-severity,
+    #btn-critical::before,
+    .button:has(> #btn-all, > #btn-info, > #btn-high, > #btn-critical) {
+        animation: none;
+    }
+
+    #btn-all,
+    #btn-info,
+    #btn-high,
+    #btn-critical {
+        transition: none;
+
+        &::after {
+            display: none;
+        }
+    }
+}

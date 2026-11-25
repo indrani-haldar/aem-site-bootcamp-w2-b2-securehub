@@ -1,0 +1,59 @@
+<section class="advisory-section" data-sly-use.model="com.securehub.core.models.AdvisoryListModel"
+         id="${model.id}" data-cmp-is="advisory-list">
+    <div class="advisory-container">
+        <header class="advisory-header">
+            <h2 class="advisory-heading" data-sly-test="${model.heading}">${model.heading}</h2>
+            <p class="advisory-count" aria-live="polite" data-advisory-count>Showing ${model.count} advisories</p>
+        </header>
+
+        <sly data-sly-test="${model.advisories}">
+            <div class="advisory-toolbar">
+                <div class="advisory-search">
+                    <label class="advisory-sr-only" for="${model.id}-search">Search advisories</label>
+                    <input class="advisory-search__input" id="${model.id}-search" type="search"
+                           placeholder="Search by title or summary" autocomplete="off" data-advisory-search/>
+                </div>
+                <div class="advisory-filters" role="group" aria-label="Filter by severity">
+                    <button type="button" class="advisory-filter is-active" aria-pressed="true" data-advisory-filter="all">All</button>
+                    <button type="button" class="advisory-filter advisory-filter--critical" aria-pressed="false" data-advisory-filter="critical">Critical</button>
+                    <button type="button" class="advisory-filter advisory-filter--info" aria-pressed="false" data-advisory-filter="info">Info</button>
+                </div>
+                <div class="advisory-sort">
+                    <label class="advisory-sort__label" for="${model.id}-sort">Sort</label>
+                    <select class="advisory-sort__select" id="${model.id}-sort" data-advisory-sort>
+                        <option value="newest">Newest first</option>
+                        <option value="oldest">Oldest first</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="advisory-grid" data-advisory-items>
+                <article data-sly-repeat.item="${model.advisories}"
+                         class="advisory-card advisory-card--${item.severityGroup}" id="${item.anchor}"
+                         data-severity="${item.severityGroup}" data-date="${item.publishTime}">
+                    <div class="advisory-card__top">
+                        <span class="advisory-card__severity">${item.severityLabel}</span>
+                        <span class="advisory-card__status advisory-card__status--${item.statusKey}" data-sly-test="${item.status}">${item.status}</span>
+                        <time class="advisory-card__date" data-sly-test="${item.publishDate}" datetime="${item.publishDateIso}">${item.publishDate}</time>
+                    </div>
+                    <h3 class="advisory-card__title" data-advisory-title>${item.title}</h3>
+                    <div class="advisory-card__summary" data-advisory-summary data-sly-test="${item.summary}">${item.summary @ context='html'}</div>
+                    <div class="advisory-card__field" data-sly-test="${item.affectedSystems}">
+                        <span class="advisory-card__label">Affected systems</span>
+                        <div class="advisory-card__value">${item.affectedSystems @ context='html'}</div>
+                    </div>
+                    <details class="advisory-card__actions" data-sly-test="${item.recommendedAction}">
+                        <summary class="advisory-card__label">Recommended actions</summary>
+                        <div class="advisory-card__value">${item.recommendedAction @ context='html'}</div>
+                    </details>
+                    <div class="advisory-card__footer" data-sly-test="${item.detailLink}">
+                        <a class="advisory-card__link" href="${item.detailLink}">View details<span class="advisory-sr-only">: ${item.title}</span></a>
+                    </div>
+                </article>
+            </div>
+            <p class="advisory-empty" hidden data-advisory-empty>No advisories match your search or filter.</p>
+        </sly>
+
+        <p class="advisory-empty" data-sly-test="${!model.advisories}">No advisories are available yet.</p>
+    </div>
+</section>

@@ -1,0 +1,18 @@
+<div class="security-alert-container"
+     data-sly-use.alert="com.securehub.core.models.SecurityAlertModel"
+     data-sly-test="${alert.title}">
+    <div class="cmp-security-alert cmp-security-alert--${alert.severity}" role="${alert.ariaRole}">
+        <p class="cmp-security-alert__severity">
+            <span class="cmp-security-alert__icon" aria-hidden="true"></span>
+            <span class="cmp-security-alert__sr-only">Severity:</span>
+            <span class="cmp-security-alert__severity-label">${alert.severityLabel}</span>
+        </p>
+        <h2 class="cmp-security-alert__title">${alert.title}</h2>
+        <p class="cmp-security-alert__summary" data-sly-test="${alert.summary}">${alert.summary}</p>
+        <p class="cmp-security-alert__date" data-sly-test="${alert.publishedDate}">
+            <span class="cmp-security-alert__date-label">Published:</span>
+            <time datetime="${alert.publishedDateTime}">${alert.publishedDate}</time>
+        </p>
+        <a class="cmp-security-alert__cta" data-sly-test="${alert.ctaText && alert.ctaLink}" href="${alert.ctaLink}">${alert.ctaText}</a>
+    </div>
+</div>

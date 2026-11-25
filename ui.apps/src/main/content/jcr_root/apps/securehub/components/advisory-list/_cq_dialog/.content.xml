@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Advisory List"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <heading
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Heading"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <heading
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="Section Heading"
+                                name="./heading"/>
+                            <detailsPage
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                fieldLabel="Details Page"
+                                fieldDescription="Page that &quot;View details&quot; links to. It should also contain an Advisory List so each link lands on its advisory card."
+                                name="./detailsPage"
+                                rootPath="/content/securehub"/>
+                        </items>
+                    </heading>
+                    <advisoryPaths
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Advisory Paths"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <advisoryPaths
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                fieldLabel="Select Advisory Content Fragments"
+                                fieldDescription="Leave empty to show every advisory in the advisories folder. Select up to 4 to feature specific advisories in the order listed.">
+                                <field
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                    fieldLabel="Advisory Fragment"
+                                    name="./advisoryPaths"
+                                    rootPath="/content/dam/securehub/advisories"
+                                    filter="hierarchy"/>
+                            </advisoryPaths>
+                        </items>
+                    </advisoryPaths>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

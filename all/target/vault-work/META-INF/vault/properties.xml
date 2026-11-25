@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>SecureHub Employee Security Portal - All</comment>
+<entry key="allowIndexDefinitions">false</entry>
+<entry key="created">2026-11-25T06:42:24.341Z</entry>
+<entry key="groupId">com.securehub</entry>
+<entry key="name">securehub.all</entry>
+<entry key="description">All content package for SecureHub Employee Security Portal</entry>
+<entry key="artifactId">securehub.all</entry>
+<entry key="version">1.0.0-SNAPSHOT</entry>
+<entry key="packageType">container</entry>
+<entry key="requiresRoot">false</entry>
+<entry key="group">com.securehub</entry>
+</properties>

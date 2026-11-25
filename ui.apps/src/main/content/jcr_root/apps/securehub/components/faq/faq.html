@@ -1,0 +1,28 @@
+<section class="cmp-faq" data-cmp-is="faq" id="${faq.id}"
+         data-sly-use.faq="com.securehub.core.models.FAQModel">
+    <div class="cmp-faq__list" data-sly-test="${faq.hasItems}">
+        <div class="cmp-faq__item" data-sly-list.item="${faq.items}">
+            <h3 class="cmp-faq__heading">
+                <button type="button" class="cmp-faq__trigger"
+                        id="${faq.id}-trigger-${itemList.index}"
+                        aria-expanded="false"
+                        aria-controls="${faq.id}-panel-${itemList.index}"
+                        data-cmp-hook-faq="trigger">
+                    <span class="cmp-faq__question">${item.question}</span>
+                    <span class="cmp-faq__icon" aria-hidden="true"></span>
+                </button>
+            </h3>
+            <div class="cmp-faq__panel"
+                 id="${faq.id}-panel-${itemList.index}"
+                 role="region"
+                 aria-labelledby="${faq.id}-trigger-${itemList.index}"
+                 data-cmp-hook-faq="panel"
+                 hidden>
+                <p class="cmp-faq__answer" data-sly-test="${item.answer}">${item.answer}</p>
+            </div>
+        </div>
+    </div>
+    <p class="cmp-faq__empty" data-sly-test="${!faq.hasItems}">
+        No questions have been added yet. Check back soon.
+    </p>
+</section>

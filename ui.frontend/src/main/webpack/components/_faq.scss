@@ -1,0 +1,210 @@
+// FAQ accordion: each question is a card. The trigger button carries the state (aria-expanded);
+// the item, icon and panel styles all key off that attribute.
+$faq-ink: #0f172a;
+$faq-muted: #475569;
+$faq-border: #e2e8f0;
+$faq-blue: #2457ff;
+$faq-violet: #7c3aed;
+
+@keyframes faq-reveal {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.cmp-faq {
+    max-width: 760px;
+    margin: 0 auto 0.85rem;
+    color: $faq-ink;
+    font-family: $font-family;
+    line-height: $font-height;
+}
+
+.cmp-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.cmp-faq__item {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid $faq-border;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+
+    // Accent bar on the left, shown on hover and when open
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 4px;
+        background: linear-gradient(180deg, $faq-blue, $faq-violet);
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.3s ease;
+    }
+
+    &:hover {
+        border-color: #cbd5e1;
+        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+        transform: translateY(-2px);
+
+        &::before {
+            transform: scaleY(1);
+        }
+    }
+
+    &:has([aria-expanded="true"]) {
+        border-color: rgba(36, 87, 255, 0.35);
+        box-shadow: 0 12px 28px rgba(36, 87, 255, 0.12);
+
+        &::before {
+            transform: scaleY(1);
+        }
+    }
+}
+
+.cmp-faq__heading {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.cmp-faq__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 44px;
+    padding: 1.1rem 1.25rem 1.1rem 1.5rem;
+    border: 0;
+    background: transparent;
+    color: $faq-ink;
+    font: inherit;
+    font-weight: 650;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover .cmp-faq__question,
+    &[aria-expanded="true"] .cmp-faq__question {
+        color: $faq-blue;
+    }
+
+    &:focus-visible {
+        outline: 3px solid rgba(36, 87, 255, 0.45);
+        outline-offset: -3px;
+        border-radius: 16px;
+    }
+}
+
+.cmp-faq__question {
+    transition: color 0.2s ease;
+}
+
+// Round plus icon that turns into a minus when open (drawn with pseudo-elements, no icon font)
+.cmp-faq__icon {
+    position: relative;
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #eef2ff;
+    transition: background 0.3s ease, transform 0.3s ease;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 12px;
+        height: 2px;
+        margin: -1px 0 0 -6px;
+        border-radius: 2px;
+        background: $faq-blue;
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    &::after {
+        transform: rotate(90deg);
+    }
+
+    .cmp-faq__trigger:hover > & {
+        transform: scale(1.08);
+    }
+
+    [aria-expanded="true"] > & {
+        background: linear-gradient(135deg, $faq-blue, $faq-violet);
+        transform: rotate(180deg);
+
+        &::before,
+        &::after {
+            background: #fff;
+        }
+
+        &::after {
+            transform: rotate(0deg);
+        }
+    }
+}
+
+.cmp-faq__panel {
+    padding: 0 1.5rem 1.25rem;
+    animation: faq-reveal 0.3s ease-out;
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.cmp-faq__answer {
+    margin: 0;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: $faq-muted;
+    // Keeps line breaks typed in the textarea
+    white-space: pre-line;
+}
+
+.cmp-faq__empty {
+    margin: 0;
+    padding: 1.5rem;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 16px;
+    background-color: #f8fafc;
+    color: $faq-muted;
+    text-align: center;
+}
+
+// Tablet and up: larger text and spacing
+@media (min-width: 768px) {
+    .cmp-faq__trigger {
+        padding: 1.3rem 1.5rem 1.3rem 1.75rem;
+        font-size: 1.1rem;
+    }
+
+    .cmp-faq__panel {
+        padding: 0 1.75rem 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cmp-faq__item,
+    .cmp-faq__item::before,
+    .cmp-faq__icon,
+    .cmp-faq__icon::before,
+    .cmp-faq__icon::after {
+        transition: none;
+    }
+
+    .cmp-faq__item:hover {
+        transform: none;
+    }
+
+    .cmp-faq__panel {
+        animation: none;
+    }
+}

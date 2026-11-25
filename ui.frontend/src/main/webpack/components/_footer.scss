@@ -1,0 +1,223 @@
+/* ========================================
+   FOOTER (IDs authored in the component dialogs; Core Components render the ID on the .cmp-* element)
+   #securehub-footer           -> Container                     (.cmp-container)
+   #securehub-footer_links     -> Text / List / Navigation       (.cmp-text / .cmp-list / nav.cmp-navigation)
+   #securehub-footer_copyright -> Text or Title                  (.cmp-text / .cmp-title)
+   ======================================== */
+
+// Base band on the XF wrapper; spacing moves to #securehub-footer once it is authored.
+footer.experiencefragment {
+    background-color: #101828;
+    color: #d0d5dd;
+    font-family: $font-family;
+    line-height: $font-height;
+
+    &:not(:has(#securehub-footer)) {
+        padding: 24px 16px;
+        text-align: center;
+    }
+}
+
+#securehub-footer {
+    --footer-bg: #101828;
+    --footer-text: #d0d5dd;
+    --footer-muted: #98a2b3;
+    --footer-link-hover: #ffffff;
+    --footer-accent: #7c3aed;
+    --footer-divider: rgba(255, 255, 255, 0.12);
+
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 40px 24px 24px;
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+
+    // Gradient accent line across the top edge.
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #1849a9, var(--footer-accent));
+    }
+}
+
+/* Footer layout: items sit directly in the container (simple layout) or in .aem-Grid (responsive grid layout). */
+#securehub-footer:not(:has(> .aem-Grid)),
+#securehub-footer > .aem-Grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#securehub-footer > .aem-Grid {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    > .aem-GridColumn {
+        float: none;
+        width: 100%;
+    }
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+#securehub-footer_links {
+    width: 100%;
+    margin: 0;
+
+    p {
+        margin: 0;
+    }
+
+    // Lists from Text (ul), List (.cmp-list) or Navigation (.cmp-navigation__group) render as a centred row.
+    ul,
+    .cmp-list,
+    .cmp-navigation__group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 28px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li,
+    .cmp-list__item,
+    .cmp-navigation__item {
+        margin: 0;
+    }
+
+    .cmp-navigation__item .cmp-navigation__group {
+        display: none;
+    }
+
+    a {
+        position: relative;
+        display: inline-block;
+        padding: 4px 0;
+        color: var(--footer-muted);
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--footer-accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: var(--footer-link-hover);
+            text-decoration: none;
+
+            &::after {
+                transform: scaleX(1);
+            }
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--footer-accent);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+    }
+
+    .cmp-list__item-title {
+        color: inherit;
+    }
+
+    .cmp-list__item-date {
+        display: none;
+    }
+}
+
+/* ========================================
+   COPYRIGHT
+   ======================================== */
+
+#securehub-footer_copyright {
+    width: 100%;
+    margin: 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--footer-divider);
+    color: var(--footer-muted);
+    font-size: 0.85rem;
+    text-align: center;
+
+    p,
+    .cmp-title__text {
+        margin: 0;
+        font-size: inherit;
+        font-weight: 400;
+        color: inherit;
+    }
+
+    a {
+        color: var(--footer-text);
+        text-decoration: underline;
+
+        &:hover,
+        &:focus-visible {
+            color: var(--footer-link-hover);
+        }
+    }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 767px) {
+    #securehub-footer {
+        padding: 32px 16px 20px;
+    }
+
+    #securehub-footer_links {
+        ul,
+        .cmp-list,
+        .cmp-navigation__group {
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        a {
+            font-size: 0.9rem;
+        }
+    }
+
+    #securehub-footer_copyright {
+        padding-top: 16px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #securehub-footer_links a,
+    #securehub-footer_links a::after {
+        transition: none;
+    }
+}

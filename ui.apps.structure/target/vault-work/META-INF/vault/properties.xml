@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>SecureHub Employee Security Portal - Repository Structure Package</comment>
+<entry key="allowIndexDefinitions">true</entry>
+<entry key="created">2026-11-25T06:42:04.806Z</entry>
+<entry key="groupId">com.securehub</entry>
+<entry key="description">Empty package that defines the structure of the Adobe Experience Manager repository the Code packages in this project deploy into.
+        Any roots in the Code packages of this project should have their parent enumerated in the Filters list below.</entry>
+<entry key="noIntermediateSaves">true</entry>
+<entry key="version">1.0.0-SNAPSHOT</entry>
+<entry key="packageType">mixed</entry>
+<entry key="requiresRoot">false</entry>
+<entry key="cloudManagerTarget">none</entry>
+<entry key="name">securehub.ui.apps.structure</entry>
+<entry key="artifactId">securehub.ui.apps.structure</entry>
+<entry key="group">com.securehub</entry>
+</properties>

@@ -1,0 +1,23 @@
+<div class="training-card-container"
+     data-sly-use.card="com.securehub.core.models.TrainingCardModel"
+     data-sly-test="${card.courseTitle}">
+    <article class="cmp-training-card" data-level="${card.level}">
+        <div class="cmp-training-card__media" data-sly-test="${card.fileReference}">
+            <img class="cmp-training-card__img" src="${card.fileReference}" alt="" loading="lazy"/>
+        </div>
+        <div class="cmp-training-card__body">
+            <p class="cmp-training-card__badges">
+                <span class="cmp-training-card__level" data-sly-test="${card.levelLabel}">${card.levelLabel}</span>
+                <span class="cmp-training-card__format" data-sly-test="${card.formatLabel}">${card.formatLabel}</span>
+            </p>
+            <h3 class="cmp-training-card__title">${card.courseTitle}</h3>
+            <dl class="cmp-training-card__meta" data-sly-test="${card.duration}">
+                <dt class="cmp-training-card__meta-label">Duration</dt>
+                <dd class="cmp-training-card__meta-value">${card.duration}</dd>
+            </dl>
+            <a class="cmp-training-card__cta" data-sly-test="${card.ctaLink}" href="${card.ctaLink}">
+                ${card.ctaText}<span class="cmp-training-card__sr-only"> ${card.courseTitle}</span>
+            </a>
+        </div>
+    </article>
+</div>

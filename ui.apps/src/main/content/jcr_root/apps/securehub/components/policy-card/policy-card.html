@@ -1,0 +1,15 @@
+<section class="policy-section" data-sly-use.model="com.securehub.core.models.PolicyCardModel">
+    <div class="policy-section__header">
+        <h2 class="policy-section__title">Featured Policies</h2>
+        <p class="policy-section__intro">Explore organizational security policies.</p>
+    </div>
+    <div class="policy-grid" data-sly-test="${model.policies}">
+        <sly data-sly-list.policy="${model.policies}">
+            <article class="policy-card">
+                <span class="policy-card__category" data-sly-test="${policy.category}">${policy.category}</span>
+                <h3 class="policy-card__title">${policy.title}</h3>
+            </article>
+        </sly>
+    </div>
+    <p class="policy-section__empty" data-sly-test="${!model.policies}">No policies have been selected yet.</p>
+</section>

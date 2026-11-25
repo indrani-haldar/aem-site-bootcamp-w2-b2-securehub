@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Created-By: Apache Jackrabbit FileVault - Package Maven Plugin 1.3.6
+Build-Jdk-Spec: 21
+Implementation-Title: SecureHub Employee Security Portal - All
+Implementation-Version: 1.0.0-SNAPSHOT
+Content-Package-Type: container
+Content-Package-Id: com.securehub:securehub.all:1.0.0-SNAPSHOT
+Content-Package-Description: All content package for SecureHub Employee 
+ Security Portal
+Content-Package-Roots: /apps/securehub-packages,/apps/securehub-vendor-p
+ ackages
+

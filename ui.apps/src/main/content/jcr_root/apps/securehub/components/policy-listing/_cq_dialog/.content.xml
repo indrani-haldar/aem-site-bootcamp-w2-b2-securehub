@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Policy Listing"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+        <items jcr:primaryType="nt:unstructured">
+            <tabs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/tabs"
+                maximized="{Boolean}true">
+                <items jcr:primaryType="nt:unstructured">
+                    <policies
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Policies"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        margin="{Boolean}true">
+                        <items jcr:primaryType="nt:unstructured">
+                            <fragmentPaths
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
+                                fieldLabel="Select Policy Content Fragments"
+                                fieldDescription="Select Content Fragment assets under /content/dam/securehub/policies. Cards appear in the order listed; unavailable fragments are skipped.">
+                                <field
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                    fieldLabel="Policy Content Fragment"
+                                    name="./fragmentPaths"
+                                    forceSelection="{Boolean}true"
+                                    rootPath="/content/dam/securehub/policies"/>
+                            </fragmentPaths>
+                            <detailsPage
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                fieldLabel="Policy details page"
+                                fieldDescription="Optional. Read policy links point to this page. If empty, links jump to the card on this page."
+                                name="./detailsPage"
+                                rootPath="/content/securehub"
+                                filter="hierarchy"/>
+                        </items>
+                    </policies>
+                </items>
+            </tabs>
+        </items>
+    </content>
+</jcr:root>

@@ -1,0 +1,5 @@
+#File edited by the Apache Sling Content Package to Sling Feature converter
+#Wed Nov 25 12:12:47 IST 2026
+(default)=securehub.all.json
+author=securehub.all-author.json
+publish=securehub.all-publish.json

@@ -1,0 +1,298 @@
+/* ========================================
+   HEADER (IDs authored in the component dialogs; Core Components render the ID on the .cmp-* element)
+   #securehub-header        -> Container        (.cmp-container)
+   #securehub-header_logo   -> Title or Image   (.cmp-title / .cmp-image)
+   #securehub-header_nav    -> Navigation       (nav.cmp-navigation)
+   #securehub-header_button -> Button           (a.cmp-button / button.cmp-button)
+   ======================================== */
+
+#securehub-header {
+    --header-ink: #111827;
+    --header-text: #1f2937;
+    --header-accent: #2457ff;
+    --header-accent-dark: #1a3fcc;
+    --header-border: #d7dde5;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid var(--header-border);
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+    backdrop-filter: saturate(180%) blur(8px);
+}
+
+/* Header row: items sit directly in the container (simple layout) or in .aem-Grid (responsive grid layout). */
+#securehub-header:not(:has(> .aem-Grid)),
+#securehub-header > .aem-Grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "logo nav button";
+    align-items: center;
+    column-gap: 2rem;
+    min-height: 64px;
+}
+
+#securehub-header > .aem-Grid {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    > .aem-GridColumn {
+        float: none;
+        width: auto;
+        min-width: 0;
+    }
+}
+
+#securehub-header :has(> #securehub-header_logo) {
+    grid-area: logo;
+}
+
+#securehub-header :has(> #securehub-header_nav) {
+    grid-area: nav;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+#securehub-header :has(> #securehub-header_button) {
+    grid-area: button;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ========================================
+   LOGO
+   ======================================== */
+
+#securehub-header_logo {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    .cmp-title__text {
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+        background: linear-gradient(90deg, #1849a9, #7c3aed);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .cmp-title__link,
+    .cmp-image__link {
+        display: inline-flex;
+        text-decoration: none;
+    }
+
+    .cmp-image__image {
+        display: block;
+        width: auto;
+        max-height: 44px;
+    }
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+
+#securehub-header_nav {
+    max-width: 100%;
+
+    .cmp-navigation__group {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        flex-wrap: nowrap;
+    }
+
+    /* Top-level items only in the header bar. */
+    .cmp-navigation__item .cmp-navigation__group {
+        display: none;
+    }
+
+    .cmp-navigation__item {
+        margin: 0;
+    }
+
+    .cmp-navigation__item-link {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        padding: 0.375rem 0;
+        color: var(--header-text);
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 0.2s ease;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 3px;
+            border-radius: 999px;
+            background: var(--header-accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: var(--header-accent);
+            text-decoration: none;
+
+            &::after {
+                transform: scaleX(1);
+            }
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--header-accent);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+    }
+
+    .cmp-navigation__item--active > .cmp-navigation__item-link {
+        color: var(--header-accent);
+        font-weight: 600;
+
+        &::after {
+            transform: scaleX(1);
+        }
+    }
+}
+
+/* ========================================
+   BUTTON (CTA)
+   ======================================== */
+
+#securehub-header_button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--header-accent);
+    box-shadow: 0 4px 12px rgba(36, 87, 255, 0.25);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        background: var(--header-accent-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(36, 87, 255, 0.3);
+    }
+
+    &:focus-visible {
+        outline: 3px solid #b2ccff;
+        outline-offset: 2px;
+    }
+
+    .cmp-button__text {
+        color: inherit;
+    }
+
+    .cmp-button__icon {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1024px) {
+    #securehub-header:not(:has(> .aem-Grid)),
+    #securehub-header > .aem-Grid {
+        column-gap: 1.25rem;
+    }
+
+    #securehub-header_nav .cmp-navigation__group {
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 767px) {
+    #securehub-header {
+        padding: 0.75rem 1rem;
+    }
+
+    #securehub-header:not(:has(> .aem-Grid)),
+    #securehub-header > .aem-Grid {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "logo button"
+            "nav  nav";
+        row-gap: 0.75rem;
+        min-height: auto;
+    }
+
+    #securehub-header_logo .cmp-title__text {
+        font-size: 1.3rem;
+    }
+
+    /* Nav becomes a horizontally scrollable strip on small screens. */
+    #securehub-header :has(> #securehub-header_nav) {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    #securehub-header_nav {
+        .cmp-navigation__group {
+            gap: 1.25rem;
+            padding-bottom: 0.25rem;
+        }
+
+        .cmp-navigation__item-link {
+            font-size: 0.95rem;
+        }
+    }
+
+    #securehub-header_button {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #securehub-header_nav .cmp-navigation__item-link,
+    #securehub-header_nav .cmp-navigation__item-link::after,
+    #securehub-header_button {
+        transition: none;
+    }
+}

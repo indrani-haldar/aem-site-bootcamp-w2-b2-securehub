@@ -1,0 +1,277 @@
+// Policy listing: category tabs above a responsive grid of policy cards.
+section.policy-listing {
+    --pl-ink: #101828;
+    --pl-text: #344054;
+    --pl-muted: #667085;
+    --pl-border: #e4e7ec;
+    --pl-surface: #ffffff;
+    --pl-tint: #f8fafc;
+    --pl-accent: #1849a9;
+    --pl-accent-soft: #eef4ff;
+    --pl-radius: 16px;
+
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px;
+    margin: 56px auto;
+    padding: 0 clamp(16px, 4vw, 40px);
+    font-family: $font-family;
+    line-height: $font-height;
+    color: var(--pl-ink);
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    // The hidden attribute must win over the display rules below.
+    [hidden] {
+        display: none !important;
+    }
+}
+
+.policy-listing__heading {
+    margin: 0 0 8px;
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.policy-listing__intro {
+    margin: 0 0 24px;
+    color: var(--pl-text);
+}
+
+// Tabs wrap on narrow screens and keep a 44px minimum touch target.
+.policy-listing__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid var(--pl-border);
+    border-radius: var(--pl-radius);
+    background: var(--pl-tint);
+}
+
+.policy-listing__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 18px;
+    border: 1px solid var(--pl-border);
+    border-radius: 999px;
+    background: var(--pl-surface);
+    color: var(--pl-text);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+        border-color: var(--pl-accent);
+        color: var(--pl-accent);
+    }
+
+    &.is-active,
+    &[aria-selected="true"] {
+        border-color: var(--pl-accent);
+        background: var(--pl-accent);
+        color: #ffffff;
+        box-shadow: 0 2px 6px rgba(24, 73, 169, 0.2);
+
+        .policy-listing__tab-count {
+            background: #ffffff;
+            color: var(--pl-accent);
+        }
+    }
+
+    &:focus-visible {
+        outline: 3px solid var(--pl-accent);
+        outline-offset: 2px;
+    }
+}
+
+.policy-listing__tab-count {
+    min-width: 24px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: var(--pl-accent-soft);
+    color: var(--pl-accent);
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+.policy-listing__panel:focus-visible {
+    outline: 3px solid var(--pl-accent);
+    outline-offset: 6px;
+    border-radius: var(--pl-radius);
+}
+
+.policy-listing__count {
+    margin: 0 0 20px;
+    font-size: 0.875rem;
+    color: var(--pl-muted);
+}
+
+// Auto-fill keeps cards between 260px and the container width, so the grid adapts without breakpoints.
+.policy-listing__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    > li {
+        min-width: 0;
+    }
+}
+
+.policy-listing__card {
+    --pl-category-ink: #1849a9;
+    --pl-category-tint: #eef4ff;
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 24px;
+    border: 2px solid var(--pl-border);
+    border-top: 5px solid var(--pl-category-ink);
+    border-radius: 24px;
+    background: linear-gradient(160deg, var(--pl-surface) 70%, var(--pl-category-tint));
+    box-shadow: 0 4px 10px rgba(16, 24, 40, 0.06), 0 14px 30px rgba(16, 24, 40, 0.07);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    overflow-wrap: anywhere;
+
+    &[data-category="data"] {
+        --pl-category-ink: #067647;
+        --pl-category-tint: #ecfdf3;
+    }
+
+    &[data-category="network"] {
+        --pl-category-ink: #6941c6;
+        --pl-category-tint: #f4f3ff;
+    }
+
+    &[data-category="usage"] {
+        --pl-category-ink: #b54708;
+        --pl-category-tint: #fffaeb;
+    }
+
+    &:hover,
+    &:focus-within {
+        transform: translateY(-4px);
+        border-color: var(--pl-category-ink);
+        box-shadow: 0 8px 16px rgba(16, 24, 40, 0.08), 0 20px 40px rgba(16, 24, 40, 0.12);
+    }
+}
+
+.policy-listing__category {
+    align-self: flex-start;
+    margin: 0 0 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--pl-category-tint);
+    color: var(--pl-category-ink);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.policy-listing__title {
+    margin: 0 0 16px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.policy-listing__meta {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 6px 12px;
+    margin: 0 0 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--pl-border);
+    font-size: 0.875rem;
+
+    > div {
+        display: contents;
+    }
+
+    dt {
+        color: var(--pl-muted);
+    }
+
+    dd {
+        margin: 0;
+        color: var(--pl-text);
+        font-weight: 600;
+        overflow-wrap: anywhere;
+    }
+}
+
+.policy-listing__link {
+    margin-top: auto;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    color: var(--pl-accent);
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &:focus-visible {
+        outline: 3px solid var(--pl-accent);
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+}
+
+.policy-listing__link-arrow {
+    font-size: 1.25rem;
+}
+
+.policy-listing__empty {
+    margin: 24px 0 0;
+    padding: 32px 20px;
+    border: 1px dashed var(--pl-border);
+    border-radius: var(--pl-radius);
+    background: var(--pl-tint);
+    color: var(--pl-muted);
+    text-align: center;
+}
+
+// Screen-reader-only text for "Read policy: <title>" links.
+.policy-listing .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .policy-listing__tab,
+    .policy-listing__card {
+        transition: none;
+    }
+
+    .policy-listing__card:hover,
+    .policy-listing__card:focus-within {
+        transform: none;
+    }
+}

@@ -1,0 +1,263 @@
+/* ========================================
+   HERO
+   #securehub-hero             -> section (2 columns: content | image; stacks on mobile)
+   #securehub-hero_content     -> text column
+   #securehub-hero_title       -> h1
+   #securehub-hero_description -> paragraph
+   #securehub-hero_button      -> "Explore Policies" CTA
+   #securehub-hero_image       -> image column
+   ======================================== */
+
+#securehub-hero {
+    --hero-ink: #0b1220;
+    --hero-muted: #475467;
+    --hero-accent: #2457ff;
+    --hero-accent-dark: #1a3fcc;
+    --hero-accent-2: #7c3aed;
+
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(32px, 5vw, 72px);
+    max-width: 1200px;
+    margin: 32px auto;
+    padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 64px);
+    overflow: hidden;
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at 85% 15%, rgba(124, 58, 237, 0.14), transparent 45%),
+        radial-gradient(circle at 10% 90%, rgba(36, 87, 255, 0.12), transparent 50%),
+        linear-gradient(135deg, #f5f8ff 0%, #ffffff 60%);
+    border: 1px solid #e4e9f2;
+    box-shadow: 0 20px 48px rgba(16, 24, 40, 0.08);
+    font-family: $font-family;
+    color: var(--hero-ink);
+    box-sizing: border-box;
+
+    // Without an image the text spans the full width.
+    &:not(:has(#securehub-hero_image)) {
+        grid-template-columns: 1fr;
+        text-align: center;
+
+        #securehub-hero_content {
+            align-items: center;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+    }
+}
+
+#securehub-hero_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+#securehub-hero_title {
+    margin: 0;
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+    background: linear-gradient(90deg, var(--hero-ink) 0%, #1849a9 60%, var(--hero-accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+#securehub-hero_description {
+    max-width: 56ch;
+    margin: 0;
+    font-size: clamp(1rem, 0.95rem + 0.35vw, 1.2rem);
+    line-height: 1.6;
+    color: var(--hero-muted);
+}
+
+#securehub-hero_button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--hero-accent), var(--hero-accent-2));
+    box-shadow: 0 10px 24px rgba(36, 87, 255, 0.28);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &::after {
+        content: "\2192";
+        transition: transform 0.2s ease;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px rgba(36, 87, 255, 0.35);
+
+        &::after {
+            transform: translateX(4px);
+        }
+    }
+
+    &:focus-visible {
+        outline: 3px solid #b2ccff;
+        outline-offset: 3px;
+    }
+}
+
+#securehub-hero_image {
+    position: relative;
+    margin: 0;
+
+    // Soft glow behind the image.
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 8% -4% -6% 8%;
+        z-index: 0;
+        border-radius: 24px;
+        background: linear-gradient(135deg, rgba(36, 87, 255, 0.25), rgba(124, 58, 237, 0.25));
+        filter: blur(28px);
+    }
+
+    .securehub-hero__img {
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 440px;
+        border-radius: 20px;
+        object-fit: cover;
+        box-shadow: 0 16px 40px rgba(16, 24, 40, 0.16);
+    }
+}
+
+.securehub-hero__placeholder {
+    margin: 16px 0;
+    padding: 24px;
+    border: 1px dashed #d0d5dd;
+    border-radius: 12px;
+    color: #475467;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    #securehub-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    #securehub-hero_content {
+        align-items: center;
+    }
+
+    #securehub-hero_description {
+        margin: 0 auto;
+    }
+
+    // Image above the text on smaller screens.
+    #securehub-hero_image {
+        order: -1;
+        max-width: 560px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 767px) {
+    #securehub-hero {
+        margin: 16px;
+        padding: 32px 20px;
+        border-radius: 18px;
+    }
+
+    #securehub-hero_button {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    #securehub-hero_image .securehub-hero__img {
+        max-height: 260px;
+        border-radius: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #securehub-hero_button,
+    #securehub-hero_button::after {
+        transition: none;
+    }
+}
+
+#TextBoxCapabilitiesContainer {
+ 
+    .textimage {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+ 
+    // Shield icon
+    .textimage img,
+    .cmp-image img {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px;
+        object-fit: contain;
+        display: block;
+    }
+ 
+    // Capabilities heading
+    .textimage .cmp-text p {
+        margin: 0;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #111827;
+    }
+}
+ 
+#TextBoxCapabilities {
+ 
+    p {
+        margin: 0 0 16px;
+        font-size: 20px;
+        line-height: 1.5;
+        color: #111827;
+    }
+ 
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+ 
+    li {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 18px;
+        font-size: 20px;
+        line-height: 1.5;
+    }
+ 
+    li::before {
+        content: "\2713";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #1D4ED8;
+        font-size: 30px;
+        font-weight: 700;
+    }
+}
+ 
