@@ -1,0 +1,77 @@
+#quick-links {
+
+    .cmp-container {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+
+    h2,
+    .quick-links-title {
+        margin: 0;
+        min-width: 180px;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #667085;
+        line-height: 1.2;
+    }
+
+    .button-group,
+    .cmp-button-group {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .cmp-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-width: 160px;
+        height: 56px;
+
+        padding: 0 2rem;
+
+        border: 3px solid #2f55e7;
+        border-radius: 14px;
+
+        background: #fff;
+        color: #2f55e7;
+
+        font-size: 1.875rem;
+        font-weight: 700;
+        text-decoration: none;
+
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: #2f55e7;
+            color: #fff;
+        }
+    }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+    #quick-links {
+
+        .cmp-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .button-group,
+        .cmp-button-group {
+            width: 100%;
+        }
+
+        .cmp-button {
+            min-width: 140px;
+            font-size: 1.5rem;
+        }
+    }
+}

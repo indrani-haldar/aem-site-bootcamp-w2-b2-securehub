@@ -1,0 +1,64 @@
+#policy-section {
+
+    .aem-Grid {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    // Title
+    .title {
+        width: 100%;
+        margin-bottom: 8px;
+
+        .cmp-title__text {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0;
+            color: #0f172a;
+        }
+    }
+
+    // Description text
+    .text {
+        width: 100%;
+        margin-bottom: 20px;
+
+        p {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #64748b;
+        }
+    }
+
+    // Button group layout
+    .button,
+    [class*="button_"] {
+        display: inline-block;
+        width: auto;
+        margin-right: 12px;
+    }
+
+    .cmp-button {
+        padding: 8px 18px;
+        border-radius: 999px;
+        border: 2px solid #d6dee8;
+        background: #fff;
+        color: #111827;
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .cmp-button:hover {
+        background: #f8fafc;
+    }
+
+    // First button active (All)
+    .button:first-of-type .cmp-button {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #fff;
+    }
+}

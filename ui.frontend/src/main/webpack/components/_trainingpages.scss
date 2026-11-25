@@ -1,0 +1,235 @@
+/* ========================================
+   TRAINING PAGE
+   ======================================== */
+
+// #training-card-title {
+//     position: relative;
+//     margin: 0 0 2rem;
+//     padding-bottom: 16px;
+
+//     font-size: 2.5rem;
+//     font-weight: 800;
+//     line-height: 1.15;
+//     letter-spacing: -0.02em;
+//     color: #111827;
+
+//     &::after {
+//         content: "";
+//         position: absolute;
+//         left: 0;
+//         bottom: 0;
+
+//         width: 72px;
+//         height: 4px;
+
+//         background: linear-gradient(90deg, #2457ff, #7c3aed);
+//         border-radius: 999px;
+//     }
+// }
+
+/* Two cards per row. The teasers sit in AEM grid columns, so the grid is the
+   .aem-Grid that directly holds the teaser columns. */
+#awareness-training-cards {
+
+    // The id may sit on the container itself or on a wrapper, so both are covered
+    &.aem-Grid:has(> .aem-GridColumn .cmp-teaser),
+    &.cmp-container:has(> .aem-GridColumn .cmp-teaser),
+    &.cmp-container>.aem-Grid,
+    .aem-Grid:has(> .aem-GridColumn .cmp-teaser),
+    .cmp-container:has(> .aem-GridColumn .cmp-teaser),
+    .cmp-container:has(.cmp-teaser)>.aem-Grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 24px;
+        align-items: stretch;
+        width: 100%;
+
+        // AEM grid clearfix pseudo-elements would otherwise occupy grid cells
+        &::before,
+        &::after {
+            display: none !important;
+        }
+    }
+
+    .aem-GridColumn {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0;
+        flex: unset !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .cmp-teaser {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+
+        padding: 10px;
+
+        background: #ffffff;
+        border: 2px solid #cbd5e1;
+        border-radius: 12px;
+        color: #1e293b;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+            border-color: #94a3b8;
+            box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+        }
+    }
+
+    /* Image first, rounded, on a light placeholder background */
+    .cmp-teaser__image {
+        width: 100%;
+        margin: 0;
+        background: #e2e8f0;
+        border-radius: 8px;
+        overflow: hidden;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            aspect-ratio: 16 / 5;
+            object-fit: cover;
+        }
+    }
+
+    /* Title + meta on top; pretitle pill (left) and action link (right) share the bottom row */
+    .cmp-teaser__content {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "title title"
+            "desc desc"
+            "pill action";
+        align-items: end;
+        flex: 1 1 auto;
+        padding: 14px 6px 4px;
+        min-width: 0;
+    }
+
+    .cmp-teaser__title {
+        grid-area: title;
+        margin: 0 0 6px;
+        font-size: 1.35rem;
+        font-weight: 700;
+        line-height: 1.25;
+        color: #111827;
+        overflow-wrap: anywhere;
+    }
+
+    .cmp-teaser__description {
+        grid-area: desc;
+        margin: 0 0 16px;
+        color: #6b7280;
+        font-size: 1rem;
+        line-height: 1.4;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .cmp-teaser__pretitle {
+        grid-area: pill;
+        justify-self: start;
+        align-self: end;
+        margin: 0;
+        padding: 6px 16px;
+        border: 2px solid #cbd5e1;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #111827;
+        font-size: 0.95rem;
+        font-weight: 400;
+        line-height: 1.2;
+    }
+
+    .cmp-teaser__action-container {
+        grid-area: action;
+        justify-self: end;
+        align-self: end;
+        margin: 0;
+    }
+
+    .cmp-teaser__action-link {
+        color: #1d4ed8;
+        font-weight: 700;
+        text-decoration: none;
+
+        &::after {
+            content: " >";
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+/* TABLET */
+
+@media (max-width: 991px) {
+
+    #training-card-title {
+        font-size: 2rem;
+    }
+
+    #awareness-training-cards {
+
+        .aem-Grid:has(> .aem-GridColumn .cmp-teaser),
+        .cmp-container:has(> .aem-GridColumn .cmp-teaser),
+        .cmp-container:has(.cmp-teaser)>.aem-Grid {
+            gap: 16px;
+        }
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+
+    #training-card-title {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    #awareness-training-cards {
+
+        &.aem-Grid:has(> .aem-GridColumn .cmp-teaser),
+        &.cmp-container:has(> .aem-GridColumn .cmp-teaser),
+        &.cmp-container>.aem-Grid,
+        .aem-Grid:has(> .aem-GridColumn .cmp-teaser),
+        .cmp-container:has(> .aem-GridColumn .cmp-teaser),
+        .cmp-container:has(.cmp-teaser)>.aem-Grid {
+            grid-template-columns: minmax(0, 1fr) !important;
+            gap: 12px;
+        }
+
+        .cmp-teaser__content {
+            padding: 12px 4px 2px;
+        }
+
+        .cmp-teaser__title {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    #awareness-training-cards .cmp-teaser {
+        transition: none;
+
+        &:hover {
+            transform: none;
+        }
+    }
+}

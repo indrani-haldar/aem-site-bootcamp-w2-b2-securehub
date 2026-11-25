@@ -1,0 +1,118 @@
+// Container id must be set to "security-tips" in the page's container properties (Id field)
+#security-tips {
+
+    .aem-Grid {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 0 0 12px;
+    }
+
+    .title,
+    .cmp-title {
+        margin: 0 0 12px;
+    }
+
+    .cmp-title__text {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #0f172a;
+    }
+
+    // Hide the decorative gradient underline from the title/separator
+    .separator,
+    .cmp-separator,
+    .cmp-title::after,
+    .cmp-title__text::after {
+        display: none;
+    }
+
+    .cmp-text ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .cmp-text li {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin: 0 0 8px;
+        padding: 10px 16px 10px 44px;
+        border: 2px solid #cbd5e1;
+        border-radius: 8px;
+        background: #fff;
+        color: #0f172a;
+        font-size: 1rem;
+        line-height: 1.4;
+
+        // blue bullet dot
+        &::before {
+            content: "";
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #1d4ed8;
+            transform: translateY(-50%);
+        }
+
+        // blue accent bar on the left edge
+        &::after {
+            content: "";
+            position: absolute;
+            left: -14px;
+            top: 50%;
+            width: 8px;
+            height: 38px;
+            background: #2563eb;
+            transform: translateY(-50%);
+        }
+    }
+}
+
+/* TABLET */
+
+@media (max-width: 991px) {
+
+    #security-tips .cmp-title__text {
+        font-size: 1.5rem;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+
+    #security-tips {
+
+        .aem-Grid {
+            padding-left: 10px;
+        }
+
+        .cmp-title__text {
+            font-size: 1.25rem;
+        }
+
+        .cmp-text li {
+            padding: 8px 12px 8px 36px;
+            font-size: 0.9375rem;
+
+            &::before {
+                left: 12px;
+                width: 10px;
+                height: 10px;
+            }
+
+            &::after {
+                left: -12px;
+                width: 6px;
+                height: 32px;
+            }
+        }
+    }
+}
